@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "langchain>=0.3.27",
+    "langchain-community>=0.3.27",
     "libmagic>=1.0",
     "python-magic>=0.4.27",
     "unstructured>=0.18.11",

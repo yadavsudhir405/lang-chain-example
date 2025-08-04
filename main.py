@@ -1,6 +1,6 @@
-def main():
-    print("Hello from lang-chain-example!")
-
+from source import SampleReader
 
 if __name__ == "__main__":
-    main()
+    # SampleReader().run()
+    # SampleReader().split_chunks_using_character_text_splitter()
+    SampleReader().split_text_using_recursive_character_text_splitter()
