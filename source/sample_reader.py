@@ -1,5 +1,9 @@
 from langchain_community.document_loaders import TextLoader,CSVLoader, UnstructuredURLLoader
 from langchain.text_splitter import CharacterTextSplitter, RecursiveCharacterTextSplitter
+import pandas as pd
+from sentence_transformers import SentenceTransformer
+import faiss as fs
+import numpy as np
 
 
 class SampleReader:
@@ -41,4 +45,27 @@ class SampleReader:
         for chunk in chunks:
             print(len(chunk))
 
+
+    def embeddings(self):
+        pd.set_option('display.max_colwidth', 100)
+
+        df = pd.read_csv('./resources/sample_text.csv')
+
+        encoder = SentenceTransformer("all-mpnet-base-v2")
+        vectors = encoder.encode(df.text)
+        dim = vectors.shape[1]
+
+        index = fs.IndexFlatL2(dim)
+        index.add(vectors)
+
+        # search_query = "I want to buy a polo t shirt"
+        # search_query = "An apple keeps away from doctor"
+        # search_query = "I want to visit to UK"
+        search_query = "Some random text"
+
+        vec = encoder.encode(search_query)
+        svec = np.array(vec).reshape(1, -1)
+
+        distance, I = index.search(svec, k=2)
+        print(df.loc[I[0]])
 

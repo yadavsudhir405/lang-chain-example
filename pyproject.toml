@@ -5,9 +5,14 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "faiss-cpu>=1.11.0.post1",
     "langchain>=0.3.27",
     "langchain-community>=0.3.27",
     "libmagic>=1.0",
+    "numpy>=2.3.2",
+    "pandas>=2.3.1",
+    "pandas-stubs==2.3.0.250703",
     "python-magic>=0.4.27",
+    "sentence-transformers>=5.0.0",
     "unstructured>=0.18.11",
 ]
